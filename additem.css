@@ -1,0 +1,80 @@
+/* add-item.php: collage on the left, grey form card on the right */
+* { box-sizing: border-box; }
+body {
+    margin: 0;
+    font-family: "Segoe UI", system-ui, sans-serif;
+    color: #000;
+    background: #fff;
+}
+.page { display: flex; min-height: 100vh; }
+
+.collage {
+    flex: 0 0 36%;
+    
+    background: #6b5a45 url("assets/item.jpg") center / cover no-repeat;
+}
+
+.panel {
+    flex: 1;
+    align-self: center;
+    margin: 24px;
+    padding: 36px 48px 40px;
+    max-width: 700px;
+    background: #e8e8e8;
+    border: 2px solid #0b2a3a;
+    border-radius: 22px;
+}
+.panel h1 { margin: 0 0 24px; font-size: 2rem; font-weight: 800; }
+
+.panel label { display: block; margin: 20px 0 8px; font-size: 1.1rem; }
+
+.panel input[type="text"], .file-box {
+    display: block;
+    width: 100%;
+    max-width: 540px;
+    padding: 14px 16px;
+    margin: 0;
+    font: inherit;
+    text-align: center;
+    background: #fff;
+    border: 2px solid #0b2a3a;
+    border-radius: 12px;
+    cursor: pointer;
+}
+.panel input[type="text"] { cursor: text; }
+.panel input:focus-visible, .file-box:focus-within { outline: 3px solid #1f8fbf; outline-offset: 2px; }
+
+
+input[type="file"] {
+    position: absolute;
+    width: 1px; height: 1px;
+    opacity: 0;
+    overflow: hidden;
+}
+
+.row { display: flex; align-items: center; gap: 24px; margin-top: 32px; max-width: 540px; }
+.row button {
+    padding: 12px 36px;
+    font: 700 1rem inherit;
+    color: #fff;
+    background: #4fa82f;
+    border: 0;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.row button:hover { background: #429026; }
+.cancel { color: #0b2a3a; }
+
+.error {
+    margin: 0 0 8px;
+    padding: 10px 14px;
+    background: #ffe3e3;
+    border: 2px solid #c00;
+    border-radius: 10px;
+}
+
+@media (max-width: 800px) {
+    .page { flex-direction: column; }
+    .collage { flex: 0 0 160px; }
+    .panel { margin: 16px; padding: 24px; }
+}
