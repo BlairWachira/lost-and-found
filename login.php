@@ -59,6 +59,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Login | Lost & Found</title>
 
     <link rel="stylesheet" href="style-login.css">
+
+    <style>
+        .password-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .password-wrapper input {
+            width: 100%;
+            box-sizing: border-box;
+            padding-right: 45px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+        }
+
+        .toggle-password svg {
+            width: 21px;
+            height: 21px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .toggle-password:hover {
+            color: #222;
+        }
+    </style>
 </head>
 
 <body class="login-page">
@@ -114,12 +156,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                         <label>Password</label>
 
-                        <input
-                            type="password"
-                            name="password"
-                            placeholder="Enter your password"
-                            required
-                        >
+                        <div class="password-wrapper">
+
+                            <input
+                                type="password"
+                                name="password"
+                                id="password"
+                                placeholder="Enter your password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="toggle-password"
+                                onclick="togglePassword()"
+                                aria-label="Show password"
+                                aria-pressed="false"
+                            >
+                                <svg viewBox="0 0 24 24" aria-hidden="true">
+                                    <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                </svg>
+                            </button>
+
+                        </div>
 
                     </div>
 
@@ -139,6 +199,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
 
     </div>
+
+    <script>
+        function togglePassword() {
+
+            const passwordInput = document.getElementById("password");
+            const button = document.querySelector(".toggle-password");
+
+            const isHidden = passwordInput.type === "password";
+
+            passwordInput.type = isHidden ? "text" : "password";
+
+            button.setAttribute(
+                "aria-label",
+                isHidden ? "Hide password" : "Show password"
+            );
+
+            button.setAttribute("aria-pressed", isHidden);
+
+            button.innerHTML = isHidden
+                ? `<svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M3 3l18 18"/>
+                    <path d="M10.6 10.6a2 2 0 002.8 2.8"/>
+                    <path d="M9.9 5.2A10.8 10.8 0 0112 5c6.5 0 10 7 10 7a15 15 0 01-4 4.5"/>
+                    <path d="M6.2 6.2C3.5 8 2 12 2 12s3.5 7 10 7c1 0 2-.2 2.9-.5"/>
+                </svg>`
+                : `<svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                </svg>`;
+        }
+    </script>
 
 </body>
 </html>
